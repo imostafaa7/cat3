@@ -41,5 +41,5 @@ cd cat3
 
 # Give execution permission to the script
 chmod +x cat3
-usag
+# use
 ./cat3 target.com
