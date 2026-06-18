@@ -1,60 +1,43 @@
-🐱 cat3 - Advanced Recon & Vulnerability Framework
-cat3 is a professional, stealth-oriented reconnaissance and vulnerability scanning framework designed for bug bounty hunters and security researchers. It integrates the power of several industry-standard tools with a specialized focus on anti-blocking techniques and stealth scanning using the Nuclei engine.
+# 🐱 cat3 | Advanced Recon & Vulnerability Framework
 
-🚀 Features
-Multi-Stage Reconnaissance:
-Automatic subdomain enumeration using subfinder and assetfinder.
-Precision alive-host filtering using httpx to reduce noise and avoid WAF triggers.
-Intelligent Vulnerability Scanning:
-Powered by Nuclei for high-accuracy template-based scanning.
-Stealth Mode: Targets only Critical and High severity vulnerabilities.
-Deep Analysis Mode: Exhaustive scan using all available templates.
-🛡️ Anti-Blocking System:
-Rate Limiting (-rl): Strict control over requests per second to bypass Rate-Limiters.
-Concurrency Control (-c): Managed threading to avoid server overload and IDS detection.
-User-Agent Spoofing: Custom browser-like headers to mask the tool's identity.
-Bulk Size Optimization: Minimized batch sizes to mimic human behavior.
-Organized Output: Creates dedicated directory structures for every target to keep your research clean and structured.
-🛠️ Installation
-1. Prerequisites
-Ensure you have the following tools installed in your path:
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python](https://img.shields.io/badge/bash-Professional-green.svg)
+![Security](https://img.shields.io/badge/Focus-Anti--Blocking-red.svg)
 
-Nuclei
-Subfinder
-httpx
-Assetfinder
-2. Setup
-# Clone the repository (if applicable) or save the script
-chmod +x cat3.sh
-📖 Usage
-Run the script by passing the target domain as the first argument:
+**cat3** is a high-performance, stealth-oriented reconnaissance and vulnerability scanning framework. It is specifically engineered for bug bounty hunters and security researchers who need to perform deep analysis without triggering WAFs or getting their IP banned.
 
-./cat3.sh example.com
-Menu Options:
-Option	Mode	Description
-1	Full Stealth Recon	Full pipeline: Subdomains 
-→
-→ Alive Check 
-→
-→ Stealth Nuclei Scan.
-2	Quick Scan	Rapidly checks for Critical/High vulnerabilities on known alive hosts.
-3	Deep Analysis	Comprehensive scan using all templates (Slow mode for safety).
-4	Recon Only	Only gathers subdomains and filters alive hosts.
-5	Update	Updates Nuclei templates to the latest version.
-⚙️ Stealth Logic (The "Anti-Block" Secret)
-Unlike standard scanners that "flood" a server, cat3 implements a tactical approach:
+The tool orchestrates a powerful pipeline of industry-standard tools, wrapped in a custom logic that prioritizes **stealth** and **precision**.
 
-Filter First: It never scans a dead domain. By using httpx first, it ensures every request sent by Nuclei is targeted at a responding service.
-Throttling: It uses a low Rate Limit (default 10 rps) and low concurrency, making the traffic look less like a bot and more like a slow user.
-Identity Masking: Every request is wrapped in a modern Chrome User-Agent header to bypass basic WAF filters.
-📂 Project Structure
-cat3_domain/
-├── recon/
-│   ├── subs.txt      # All discovered subdomains
-│   └── alive.txt     # Only hosts responding to HTTP/HTTPS
-└── nuclei/
-    └── results.txt   # Validated vulnerabilities found
-⚠️ Disclaimer
-cat3 is intended for educational purposes and authorized security testing only. Scanning targets without explicit permission is illegal. The author is not responsible for any misuse of this tool.
+---
 
-Developed with ❤️
+## ✨ Key Features
+
+- **🛡️ Anti-Blocking Engine:** Implements advanced rate-limiting, concurrency control, and User-Agent randomization to bypass modern IDS/WAF systems.
+- **🎯 Precision Targeting:** Uses a "Filter-First" approach; it only scans hosts verified as "alive" by `httpx`, reducing noise and detection risk.
+- **🔍 Automated Pipeline:** 
+  `Subdomain Discovery` $\rightarrow$ `Alive Host Filtering` $\rightarrow$ `Stealth Vulnerability Scanning`.
+- **⚡ Nuclei Integration:** Leverages the power of Nuclei templates with custom stealth profiles (Critical/High vs. Full Deep Scan).
+- **📂 Structured Data:** Automatically organizes all findings into domain-specific directories for easy reporting.
+
+---
+
+## 🛠️ Installation & Requirements
+
+### 1. Dependencies
+`cat3` acts as an orchestrator. You must have the following tools installed in your system path:
+
+| Tool | Purpose | Installation |
+| :--- | :--- | :--- |
+| **Nuclei** | Vulnerability Scanning | `go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest` |
+| **Subfinder** | Subdomain Enumeration | `go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest` |
+| **httpx** | Alive Host Probing | `go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest` |
+| **Assetfinder** | Subdomain Discovery | `go install github.com/tomnomnom/assetfinder@latest` |
+
+### 2. Setup
+```bash
+# Clone the repository
+git clone https://github.com/imostafaa7/cat3.git
+cd cat3
+
+# Give execution permission to the script
+chmod +x cat3
